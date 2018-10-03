@@ -1,4 +1,4 @@
-[Git repo with code]()
+[Git repo with code](https://github.com/NimaBoscarino/websockets-notes)
 
 - Note: running `node server` from the root folder will give you the youtube API demo (client side stuff is in `public`). For the Kanye head demo look into `kanye`. For the basic back-and-forth example look into `basic_chat`.
 
