@@ -8,4 +8,11 @@ socket.addEventListener("open", function(evt) {
 
 socket.addEventListener("message", (message) => {
     console.log("HEY A NEW MESSAGE FROM THE SERVER", message)
+    speechSynthesis.speak(new SpeechSynthesisUtterance(message.data))
+})
+
+document.querySelector('#send-button').addEventListener('click', () => {
+    let message = document.querySelector('input').value
+    socket.send(message);
+
 })

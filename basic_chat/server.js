@@ -13,11 +13,11 @@ wss.on('connection', function (ws) {
     ws.on('message', function incoming(message) {
         console.log('received: %s', message);
         clients.forEach(client => {
-            if (client.readyState === WebSocket.OPEN) {
+            if (client.readyState === WebSocket.OPEN && client != ws) {
                 client.send(message);
             }
         });
     });
     
-    ws.send('something');
+    //ws.send('Welcome!');
 });
