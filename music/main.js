@@ -1,4 +1,4 @@
-var socket = new WebSocket("ws://162.245.144.188:4000");
+var socket = new WebSocket("ws://localhost:4000");
 
 let sendSockets = true;
 
