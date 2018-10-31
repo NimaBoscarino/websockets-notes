@@ -1,4 +1,4 @@
-var socket = new WebSocket("ws://localhost:8080");
+var socket = new WebSocket(`ws://${window.location.hostname}:8080`);
 
 socket.addEventListener("message", (message) => {
 

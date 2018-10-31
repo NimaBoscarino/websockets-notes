@@ -1,5 +1,5 @@
 // create a websocket connection to our server
-var socket = new WebSocket("ws://localhost:8080");
+var socket = new WebSocket(`ws://${window.location.hostname}:8080`);
 speechSynthesis.getVoices();
 
 // arbitrarily send data, and have it pop up on the server
