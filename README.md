@@ -1,29 +1,11 @@
 [Git repo with code](https://github.com/NimaBoscarino/websockets-notes)
 
-- Note: running `node server` from the root folder will give you the youtube API demo (client side stuff is in `public`). For the Kanye head demo look into `kanye`. For the basic back-and-forth example look into `basic_chat`.
-
-The lecture was recorded in two parts!
-
-- [Part 1](https://www.youtube.com/watch?v=klrlvB8--ak)
-- [Part 2](https://www.youtube.com/watch?v=IRlyj6VlqGw)
-
-
-## Brainstorming
-
-Some random words about sockets:
-- plug in together
-- server and a client
-- pass information from one client to another place
-- bidirection (FULL DUPLEX)
-- not RESTful
-- real time
-- right in the web browser
+[The recorded lecture on Youtube](https://www.youtube.com/watch?v=s2x77_oaDhY)
 
 ## Goal for today
 
 Implement real-time communication between multiple clients and a server IN A BROWSER
 e.g. collaborative tools like Google docs, Trello, slack
-
 
 ## Using our tools so far
 
