@@ -2,6 +2,16 @@
 
 [The recorded lecture on Youtube](https://www.youtube.com/watch?v=s2x77_oaDhY)
 
+## How to Run Demos
+
+There are three demo projects in this repo: `basic_chat`, `kanye`, and `music`. To run these, you need to:
+
+1. `npm install -g local-web-server`
+2. `npm i` at the root of this project.
+3. Run the command `ws` in the folder of the demo that you want to try out
+4. In a separate terminal run `node server.js` in the folder of the demo that you want to try
+5. Point a couple browser tabs at the URL that step 3 gave you, and enjoy!
+
 ## Goal for today
 
 Implement real-time communication between multiple clients and a server IN A BROWSER
