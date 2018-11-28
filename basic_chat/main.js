@@ -25,4 +25,5 @@ socket.addEventListener('message', (message) => {
 document.querySelector('#send-button').addEventListener('click', () => {
   let message = document.querySelector('input').value
   socket.send(message)
+  document.querySelector('input').value = ''
 })
