@@ -83,10 +83,67 @@ ws://
 
 With websocket connections, there are 4 basic things that we can do. Our browser (and the server) allows us to listen for these events.
 
-1) open connection
-2) send message
-3) receive message
-4) close connection
+
+1. Open a websocket connection 
+
+Client side:
+
+```js
+let socket = new WebSocket(URL)
+socket.onopen = () => {
+    // when the socket opens
+}
+```
+
+Server side:
+
+```js
+    wss.on('connection', function (ws) {
+    // do thing  
+    })  
+```
 
 
+2. Send messages
+
+Client:
+
+```js
+socket.send('SOMESTRING')
+```
+
+Server side:
+
+```js
+someConnection.send('somestring')
+```
+
+3. Receive messages
+
+Client:
+
+```js
+socket.onmessage = (message) => {
+    let data = message.data
+    // do stuff
+}
+```
+
+Server side:
+
+```js
+ws.on('message', function (message) {
+    // do thing
+})
+```
+
+4. Close connections
+
+Client:
+
+```js
+socket.onclose = () => {
+    // thing to do when disconnect
+}
+```
 
