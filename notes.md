@@ -1,143 +1,123 @@
-[Git repo with code](https://github.com/NimaBoscarino/websockets-notes)
+# <REDACTED> W6D3
 
-Goal: Implement real-time communication between multiple clients and a server, IN A BROWSER. (e.g. google docs, slack, etc.)
+Goal:
 
-1st half of the lecture, you've never heard the word websockets before
+- Implement real-time communication between multiple clients and a server in a browser
 
-Google docs:
-- HTML + CSS
-  - SCSS
-- Database
-- Javascript
-  - Routing in Express
-    - /docs/12, /docs/45
-  - Implies a server (e.g. Express)
-- Sessions to keep track of who's logged in
-- User authentication
+(Google docs, chatting, etc.)
 
-- Google docs autosaves
-- A BUNCH OF DIFFERENT PEOPLE CAN WORK TOGETHER
-  - Protocols for communication
-  - HTTP
-    - hyper text transfer protocol
-    - Each time the google doc changes, we have a request to the server
-      - e.g. on every keystroke
-      - on some sort of set time, we could make an AJAX request to fetch data from the server
-        - time interval
+YOU HAVE EVERYTHING YOU NEED TO DO THIS.
 
-Problem:
+- self doubt + agony
+  - learning how to deal with it. resilience
+- SASS
+- React
+- HTTP <----- very useful
+- Javascript <---- very useful
+- recursive stuff
+- Jquery  <---- pretty useful as well
+- Mongo
+- SQL
+- Postgres
+- AJAX <---- very useful
+- Always bring a coat
+- CSS
+- HTML  <---- very useful
+- Object oriented stuff
+- GIT
 
-- Since we're in the browser, the protocol we use is HTTP
-- HTTP has two main issues
-  - server cannot initiate a request to the client (cannot push data to the client easily)
-  - HTTP is not persistent by nature. Requests are transactional.
-    - Client opens
-    - Request is made
-    - Server handles the request, forms and sends a response
-    - Client receives the response
-    - The client closes the connection
 
-HTTP: it's like talking with someone in another building by throwing paper planes back and forth, where only one person has paper.
+Making google docs
 
-Can we accomplish real-time updates w/o a persisten connection?
+- start with a wireframe
+- ERD, to figure out what data we have
+  - Users
+  - Documents
+- User stories
+  - Sign on to google docs
+  - See a document
+  - Make an edit
+  - Autosave
+  - I see edits happen.
 
-Yes we can, in two (main) ways using a technique called _polling_.
+I need to be listening for those changes.
 
-1) Simple Polling (two different ways to do this)
+HTTP - sends a request, receives a response
+- continue asking for changes.
+  - are there new changes????
 
-- constantly send GET requests to the server, asking for changes
+- AJAX
+  - $.post()
 
-- setTimeout
-  - waits a certain amount of time to perform an action (provided via a callback)
-- setInterval
-  - performs an action (provided via a callback) every X milliseconds
+## Problem:
 
-Yes it's possible.
+- Since we are in the browser, we have to use HTTP for communication.
+- Two main issues with HTTP:
+  - 1. Server cannot initiate a request to the client. Aka the server cannot push data to the client easily.
+  - 2. HTTP requests are not persistent by nature. They are transactional.
+    - CLIENT OPENS
+    - REQUEST
+    - RESPONSE
+    - CLIENT CLOSES
+  
+Can we accomplish real-time updates w/o a persistent connection?
 
-Pro: it works
-Con:
-- it could fail... it takes extra work to keep messages in order.
-- there's a little bit of a delay
+Yes, with polling!
 
-2) Long Polling - Comet polling
+## Polling
 
-- Client makes an HTTP request, but the server doesn't reply right away. The connection stays open until the server replies. Server will reply when it has new data. (connection ends) The client has to make another connection (another long poll)
+1. Simple Polling - Constantly send GET requests for new changes
+   1. setTimeout - a delay before a thing happens
+   2. setInterval - does a thing every x milliseconds
+
+Fun fact! - AR Queue was originally implemented using this.
+
+Pros: It works
+Cons: It's horrible. It's also not REALLY real time. It's pseudo real.
+
+2. Long Polling
+
+HTTP request - no worries if you can't reply right now
+Eventually the server responds.
+
+Client makes a request but the server doesn't reply right away. Server replies when it has new data. The HTTP transaction is done! So the client has to initiate another long poll.
 
 Pros:
-- fewer requests because we're not polling every x seconds
-- much close to real-time
-- responses are guaranteed to come back in order
+
+- fewer requests bc not polling every x seconds
+- Much closer to real-time
+- Responses are guaranteed to come back in order
 
 Cons:
-- demanding on the server
-- error handling? things get hairy. *ERROR FIRST CALLBACKS*
 
-Pros (all of the above): we don't need any new protocols. No new specifications for browsers.
+- demanding on the server.
+- error handling? How do we do it? - error-first callbacks
 
-It feels kinda hacky. We want a non-hacky way of doing this.
+OVERALL PRO TO ALL THIS STUFF:
 
-Name of the lecture... socks on the web AKA WEBSOCKETS.
+- NO NEED FOR NEW SPECIFICATIONS.
 
-2nd half... who knows?
+Overall CON: Feels kinda hacky.
 
-Websockets... 4 things YOU can do real-time communicate. Browser HATE him!
+non-hacky solution????....
 
-New protocol
+enter WEBSOCKETS
 
-http://www.google.com
+WEBSOCKETS - NEW PROTOCOL
 
-YOUR URLS WILL LOOK SLIGHTLY DIFFERENT
+connections to websocket endpoints: 
 
-ws://hskdjfdhsf.com
+http://lkajshdliuajhsdlkjashda.com
+https://lkjadhflkjasdlfkasf.com
 
-1. Open a websocket connection 
+ws://kjsdhlakdjfhdslkf.com
+wss://hgsdkfjghsdkjfghsdkf.com
 
-  Client side:
-  ```js
-    let socket = new WebSocket(URL)
-    socket.onopen = () => {
-      // when the socket opens
-    }
-  ```
+1) open a connection
+2) send some data
+3) receive some data
+4) close a connection
 
-  Server side:
-    ```js
-      wss.on('connection', function (ws) {
-        // do thing  
-      })  
-    ```
+There's a client
+And there's a server
 
-
-2. Send messages
-  Client:
-  ```js
-    socket.send('SOMESTRING')
-  ```
-  Server side:
-  ```js
-    someConnection.send('somestring')
-  ```
-
-3. Receive messages
-  Client:
-  ```js
-    socket.onmessage = (message) => {
-      let data = message.data
-      // do stuff
-    }
-  ```
-  Server side:
-  ```js
-    ws.on('message', function (message) {
-      // do thing
-    })
-  ```
-
-
-4. Close connections
-  Client:
-  ```js
-    socket.onclose = () => {
-      // thing to do when disconnect
-    }
-  ```

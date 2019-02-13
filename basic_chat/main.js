@@ -4,7 +4,7 @@ speechSynthesis.getVoices()
 
 // arbitrarily send data, and have it pop up on the server
 socket.addEventListener('open', function (evt) {
-  socket.send('NEW CONNECTION')
+  // socket.send('NEW CONNECTION')
 })
 
 socket.addEventListener('message', (message) => {
