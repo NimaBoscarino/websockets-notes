@@ -1,6 +1,6 @@
 [Git repo with code](https://github.com/NimaBoscarino/websockets-notes)
 
-[The recorded lecture on Youtube](https://www.youtube.com/watch?v=s2x77_oaDhY)
+[A recorded lecture on Youtube](https://www.youtube.com/watch?v=s2x77_oaDhY)
 
 ## How to Run Demos
 

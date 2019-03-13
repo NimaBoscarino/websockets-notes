@@ -5,10 +5,11 @@ let kanye_ids = []
 socket.addEventListener('message', (message) => {
   let pos = JSON.parse(message.data)
 
+  // If the Kanye ID isn't in the array, add it and make a new Kanye image
   if (!kanye_ids.includes(pos.kanye_id)) {
     kanye_ids.push(pos.kanye_id)
     let newKanyeImage = document.createElement('img')
-    newKanyeImage.src = "https://66.media.tumblr.com/tumblr_m9473r4uzP1rue873o1_400.png"
+    newKanyeImage.src = pos.kanye_head
     newKanyeImage.id = "kanye_" + pos.kanye_id
     newKanyeImage.className = "kanye"
 
